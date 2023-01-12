@@ -8,7 +8,7 @@ export class Negociacao { // usa-se o export para exportar esta classe
 
     get data() : Date{ // utiliza-se o get a fim de ler os parametros declarados
         const data = new Date(this._data.getTime()) // o get time basicamente, clonou o que se atribuiu a data e dessa forma, atribui e retorna essa clonagem de forma que nao haja a modificacao da data pelos métodos disponiveis que permitem essa alteracao
-        return this.data
+        return data
     }
 
     // get quantidade() : number{
