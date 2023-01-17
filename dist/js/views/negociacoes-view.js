@@ -1,8 +1,6 @@
+import { View } from './view.js';
 // a pasta views é o lugar da estrutura que permite escrever o html ness forma que irá aparecer na web
-export class NegociacoesView {
-    constructor(seletor) {
-        this.elemento = document.querySelector(seletor);
-    }
+export class NegociacoesView extends View {
     template(model) {
         return `
             <table class="table table-hover table-bordered">
@@ -17,7 +15,7 @@ export class NegociacoesView {
                     ${model.lista().map(negociacao => {
             return `
                             <tr>
-                                <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td> 
+                                <td>${this.formartar(negociacao.data)}</td> 
                                 <td>${negociacao.quantidade}</td>
                                 <td>${negociacao.valor}</td>
                             </tr>
@@ -28,10 +26,8 @@ export class NegociacoesView {
         `;
         // o método join pega cada elemto do array em sua respectiva posicao ex: negociacao[0] e neste caso, coloca um espaço vazio entre eles a fim de separa-los
     }
-    update(model) {
-        const template = this.template(model);
-        console.log(template);
-        this.elemento.innerHTML = template; // o método innerHTML transforma a string em elemento do dom (elemento HTML)
+    formartar(data) {
+        return new Intl.DateTimeFormat().format(data);
     }
 }
 // ${new Intl.DateTimeFormat().format(negociacao.data)}
