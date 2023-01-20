@@ -22,5 +22,7 @@ export class Negociacao { // usa-se o export para exportar esta classe
     get volume(){
         return this.quantidade * this.valor
     }
+    // public criaDe{
 
+    // }
 }

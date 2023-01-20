@@ -1,5 +1,6 @@
-import { Negociacoes } from './../models/negociacoes.js';
+import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js"
+import { Negociacoes } from './../models/negociacoes.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
 import { MensagemView } from '../views/mensagem-view.js';
 
@@ -10,8 +11,6 @@ export class NegociacaoController {
     negociacoes = new Negociacoes()
     private negociacoesView = new NegociacoesView('#negociacoesView')
     private mensagemView = new MensagemView('#mensagemView')
-    private readonly DOMINGO = 0 // readonly, somente leitura e nao aceita modificacoes
-    private readonly SABADO = 6
 
     constructor() { // chama na inicializacao
         this.inputData = document.querySelector('#data')
@@ -21,7 +20,7 @@ export class NegociacaoController {
     }
     adiciona(): void{ // void nao retorna nada
         const negociacao = this.criaNegociacao()
-        if (!this.ehDiaUtil(negociacao.data)) // negacao
+        if (!this.ehDiaUtil(negociacao.data)) // retorna verdadeiro se o valor estiver entre 1 a 5, já que está buscando a negação
         {
             this.mensagemView.update('Apenas negociações em dias úteis são aceitas')
             return
@@ -33,7 +32,7 @@ export class NegociacaoController {
 
     private ehDiaUtil(data: Date)
     {
-        return data.getDay() > this.DOMINGO && data.getDay() < this.SABADO
+        return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO
     }
 
 
